@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun renderState() = binding.apply {
-            adapter.submitList(repository.getStudents())
+            adapter.submitList(repository.getStudent(StudentsRepository.StudentType.MGU))
         }
 
 }
