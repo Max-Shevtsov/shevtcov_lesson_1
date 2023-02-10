@@ -4,23 +4,29 @@ import com.example.shevtcov_lesson_1.models.Student
 
 object StudentsRepository {
 
-    private var students: List<Student> = emptyList()
-
-    fun getStudents(): List<Student> {
-        return students.ifEmpty {
-            students = createStudent()
-            students
+    fun getStudent(studentType: StudentType): List<Student> {
+        val countStudents = when (studentType) {
+            is StudentType.MGU -> 50
+            is StudentType.KGTU -> 35
+            is StudentType.BFU -> 20
         }
-    }
-
-    private fun createStudent(): List<Student> {
-        return (0..30).toList().map { index ->
+        return (0..countStudents).toList().map { index ->
             Student(
                 age = index,
                 name = "student$index",
                 email = "student$index@mail.ru",
             )
         }
+    }
+
+    sealed class StudentType {
+
+        object MGU: StudentType()
+
+        object KGTU: StudentType()
+
+        object BFU: StudentType()
+
     }
 
 }
